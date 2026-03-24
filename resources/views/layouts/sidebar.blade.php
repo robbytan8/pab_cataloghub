@@ -55,8 +55,8 @@
           <div class="collapse" id="base">
             <ul class="nav nav-collapse">
               <li>
-                <a href="#">
-                  <span class="sub-item">Menu 1</span>
+                <a href="{{ route('category.index') }}">
+                  <span class="sub-item">Category</span>
                 </a>
               </li>
               <li>
