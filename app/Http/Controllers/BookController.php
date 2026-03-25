@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 /**
  * @author Robby Tan
@@ -32,17 +33,9 @@ class BookController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreBookRequest $request)
   {
-    $validatedData = $request->validate([
-      'isbn' => 'required|string|max:13|unique:book,isbn',
-      'title' => 'required|string|max:100',
-      'author' => 'required|string|max:100',
-      'description' => 'nullable|string|max:400',
-      'publish_year' => 'required|digits:4|integer|min:1000|max:' . (date('Y') + 1),
-      'category_id' => 'required|integer|exists:category,id',
-    ]);
-    Book::create($validatedData);
+    Book::create($request->validated());
     return redirect()->route('book.index')->with('success', 'Book created successfully.');
   }
 
@@ -66,16 +59,9 @@ class BookController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Book $book)
+  public function update(UpdateBookRequest $request, Book $book)
   {
-    $validatedData = $request->validate([
-      'title' => 'required|string|max:100',
-      'author' => 'required|string|max:100',
-      'description' => 'nullable|string|max:400',
-      'publish_year' => 'required|digits:4|integer|min:1000|max:' . (date('Y') + 1),
-      'category_id' => 'required|integer|exists:category,id',
-    ]);
-    $book->update($validatedData);
+    $book->update($request->validated());
     return redirect()->route('book.index')->with('success', 'Book updated successfully.');
   }
 
