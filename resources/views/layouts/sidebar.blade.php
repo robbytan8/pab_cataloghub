@@ -60,8 +60,8 @@
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <span class="sub-item">Menu 2</span>
+                <a href="{{ route('book.index') }}">
+                  <span class="sub-item">Book</span>
                 </a>
               </li>
             </ul>
