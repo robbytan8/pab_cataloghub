@@ -29,4 +29,4 @@ Route::middleware('auth')->group(function () {
   Route::delete('/book/{book}', [BookController::class, 'destroy'])->name('book.destroy');
 });
 
-require __DIR__ . '/auth_manual.php';
+require __DIR__ . '/auth.php';
