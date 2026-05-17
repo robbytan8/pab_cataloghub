@@ -21,7 +21,9 @@
       </div>
       <div class="card">
         <div class="card-header">
+          @if(auth()->user()->role_id === \App\Enums\UserRole::ADMIN->value)
           <a href="{{ route('category.create') }}" class="btn btn-primary mb-3">Add New Category</a>
+          @endif
         </div>
         <div class="card-body">
           <table class="table table-bordered">
@@ -30,7 +32,9 @@
               <th>ID</th>
               <th>Name</th>
               <th>Description</th>
+              @if(auth()->user()->role_id === \App\Enums\UserRole::ADMIN->value)
               <th>Actions</th>
+              @endif
             </tr>
             </thead>
             <tbody>
@@ -39,6 +43,7 @@
                 <td>{{ $category->id }}</td>
                 <td>{{ $category->name }}</td>
                 <td>{{ $category->description }}</td>
+                @if(auth()->user()->role_id === \App\Enums\UserRole::ADMIN->value)
                 <td>
                   <a href="{{ route('category.edit', $category->id) }}" class="btn btn-sm btn-warning">Edit</a>
                   <form id="delete-form-{{ $category->id }}" action="{{ route('category.destroy', $category->id) }}" method="POST" style="display: inline;">
@@ -49,6 +54,7 @@
                     </button>
                   </form>
                 </td>
+                @endif
               </tr>
             @endforeach
             </tbody>

@@ -21,7 +21,9 @@
       </div>
       <div class="card">
         <div class="card-header">
+          @if(auth()->user()->role_id === \App\Enums\UserRole::ADMIN->value)
           <a href="{{ route('book.create') }}" class="btn btn-primary mb-3">Add New Book</a>
+          @endif
         </div>
         <div class="card-body">
           <table class="table table-bordered">
@@ -31,7 +33,9 @@
               <th>Title</th>
               <th>Author</th>
               <th>Category</th>
+              @if(auth()->user()->role_id === \App\Enums\UserRole::ADMIN->value)
               <th>Actions</th>
+              @endif
             </tr>
             </thead>
             <tbody>
@@ -41,6 +45,7 @@
                 <td>{{ $book->title }}</td>
                 <td>{{ $book->author }}</td>
                 <td>{{ $book->category->name ?? 'N/A' }}</td>
+                @if(auth()->user()->role_id === \App\Enums\UserRole::ADMIN->value)
                 <td>
                   <a href="{{ route('book.edit', $book->isbn) }}" class="btn btn-sm btn-warning">Edit</a>
                   <form id="delete-form-{{ $book->isbn }}" action="{{ route('book.destroy', $book->isbn) }}" method="POST" style="display: inline;">
@@ -51,6 +56,7 @@
                     </button>
                   </form>
                 </td>
+                @endif
               </tr>
             @endforeach
             </tbody>
