@@ -34,4 +34,32 @@ class StoreBookRequest extends FormRequest
       'category_id' => 'required|exists:category,id',
     ];
   }
+
+  /**
+   * Get the error messages for the defined validation rules.
+   *
+   * @return array<string, string>
+   */
+  public function messages(): array
+  {
+    return [
+      'isbn.required' => 'ISBN is required.',
+      'isbn.string' => 'ISBN must be a string.',
+      'isbn.max' => 'ISBN must not exceed 13 characters.',
+      'isbn.unique' => 'ISBN must be unique.',
+      'title.required' => 'Title is required.',
+      'title.string' => 'Title must be a string.',
+      'title.max' => 'Title must not exceed 100 characters.',
+      'title.unique' => 'Title must be unique.',
+      'author.required' => 'Author is required.',
+      'author.string' => 'Author must be a string.',
+      'author.max' => 'Author must not exceed 100 characters.',
+      'publish_year.required' => 'Publish year is required.',
+      'publish_year.integer' => 'Publish year must be an integer.',
+      'publish_year.min' => 'Publish year must be a valid year.',
+      'publish_year.max' => 'Publish year must not be in the future.',
+      'category_id.required' => 'Category is required.',
+      'category_id.exists' => 'Selected category is invalid.',
+    ];
+  }
 }
